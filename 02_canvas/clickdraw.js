@@ -46,14 +46,19 @@ c.addEventListener("click", function (e) {
   var y = e.offsetY;
   if (draw_state === "rect") {
     console.log("drawing rect at (" + x + ", " + y + ")");
-    ctx.fillRect(x, y, 50, 50);
+    drawRect(x, y, 50, 50);
   } else {
     console.log("drawing ellipse at (" + x + ", " + y + ")");
     // starts a drawing path, which can later be filled using ctx.fill()
     ctx.beginPath();
-    ctx.arc(x, y, 25, 0, 2 * Math.PI);
+    ctx.ellipse(x, y, 25, 25, 0, 0, 2 * Math.PI);
     ctx.fill();
   }
   // prevents default action upon clicking canvas
   e.preventDefault();
 });
+
+var drawRect = function (x, y, w, h) {
+  console.log("drawing rect at (" + x + ", " + y + ")");
+  ctx.fillRect(x, y, w, h);
+};
