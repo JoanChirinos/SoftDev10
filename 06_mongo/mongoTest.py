@@ -1,4 +1,5 @@
-# Joan Chirinos
+# Team PinkSeal
+# Joan Chirinos, Anton Danylenko
 # SoftDev2 pd08
 # K06 -- Yummy Mongo Py
 
