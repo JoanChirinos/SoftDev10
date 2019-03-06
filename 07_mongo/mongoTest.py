@@ -58,8 +58,8 @@ def insertDocuments(collection, documents):
 
 # gets documents in collection which match the querydict (Python dictionary)
 # returns an iterable of all documents found
-def findDocuments(collection, queryDict):
-    docs = collection.find(queryDict)
+def findDocuments(collection, queryDict={}, fields={}):
+    docs = collection.find(queryDict, fields)
     return docs
 
 
@@ -74,16 +74,15 @@ def test():
     client = connect('206.189.236.112')
 
     dbnames = client.list_database_names()
-    politicians_exists = 'test' in dbnames
+    pokemon_exists = 'test' in dbnames
     # get db
     db = getDatabase(client, 'test')
 
     # get collection
     collection = getCollection(db, 'pokemon')
 
-    # IT SEEMS LIKE DOCUMENT DOESNT WANNA COOPERATE
-    # insert document if not exists
-    if not politicians_exists:
+    # insert document if db not exists
+    if not pokemon_exists:
         docs = []
         with open('BeanBois.json', 'r') as f:
             raw_json = f.read()
@@ -91,6 +90,21 @@ def test():
             docs = docs['pokemon']
 
         print(insertDocuments(collection, docs))
+
+    # do something cool
+    query = {"weaknesses": "Fire"}
+    fields = {'_id': 0, 'name': 1}
+    pokemonWeakToFire = findDocuments(collection, query, fields)
+    print('Pokemon weak to fire:')
+    for i in pokemonWeakToFire:
+        print(i['name'])
+
+    query = {"spawn_chance": {'$lt': 0.1}, '$or': [{"type": "Grass"}, {"type": "Fire"}]}
+    fields = {'_id': 0, 'name': 1, 'type': 1}
+    rarePokemonEitherFireOrGrass = findDocuments(collection, query, fields)
+    print('Rare pokemon that are either Fire or Grass type:')
+    for i in rarePokemonEitherFireOrGrass:
+        print('{} -- {}'.format(i['name'], ' and '.join(i['type'])))
 
 
 test()
