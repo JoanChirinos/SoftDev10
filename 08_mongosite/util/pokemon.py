@@ -66,7 +66,6 @@ def findDocuments(collection, queryDict={}, fields={}):
 def countDocuments(collection, queryDict={}):
     return collection.count_documents(queryDict)
 
-
 # TESTING METHOD #
 def test():
     # connecting to my droplet (using the default port)

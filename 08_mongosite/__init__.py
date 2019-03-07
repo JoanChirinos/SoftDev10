@@ -38,7 +38,7 @@ def getMen():
         qweaknesses = [{'weaknesses': i} for i in weaknesses]
         query = {'$and': qtypes + qweaknesses}
         if id.strip() != '':
-            query['id'] = id
+            query['id'] = int(id)
         fields = {'_id': 0, 'name': 1, 'weaknesses': 1, 'type': 1, 'img': 1, 'id': 1}
         print('QUERY:')
         pprint.pprint(query)
@@ -62,7 +62,7 @@ def getMen():
             qweaknesses = [{}]
         query = {'$and': [{'$or': qtypes}, {'$or': qweaknesses}]}
         if id.strip() != '':
-            query['id'] = id
+            query['id'] = int(id)
         fields = {'_id': 0, 'name': 1, 'weaknesses': 1, 'type': 1, 'img': 1, 'id': 1}
         print('QUERY:')
         pprint.pprint(query)
@@ -71,6 +71,7 @@ def getMen():
         pokemon = pk.findDocuments(collection, query, fields)
         print('OUT')
         pokelist = []
+        hasmon = False
         for i in pokemon:
             pokelist.append(i)
             hasmon = True
