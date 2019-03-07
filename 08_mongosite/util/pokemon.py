@@ -114,7 +114,7 @@ def test():
     for i in rarePokemonEitherFireOrGrass:
         print('{} -- {}'.format(i['name'], ' and '.join(i['type'])))
 
-    query = {'$and' : [{"type": "Fire"}, {'type': 'Flying'}]}
+    query = {"type": "Fire", 'type': 'poison'}
     # fields return the name
     fields = {'_id': 0, 'name': 1, 'type': 1}
     pokemonWeakToFire = findDocuments(collection, query, fields)
@@ -122,7 +122,7 @@ def test():
     for i in pokemonWeakToFire:
         print('{} -- {}'.format(i['name'], i['type']))
 
-test()
+# test()
 
 
 
