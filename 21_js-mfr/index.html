@@ -1,0 +1,13 @@
+<html>
+<script>
+var data = 0;
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+	if (this.readyState == 4 && this.status == 200) {
+		data = JSON.parse(this.responseText);
+	}
+};
+xhttp.open("GET", "https://raw.githubusercontent.com/stuy-softdev/workshop/master/thluffy/21_js-mfr/2006_-_2012_School_Demographics_and_Accountability_Snapshot.json?token=AH7SA4NSKFLTN7WM7XSCJKS42B2DQ", true);
+xhttp.send();
+</script>
+</html>
